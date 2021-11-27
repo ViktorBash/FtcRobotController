@@ -12,6 +12,9 @@
 # Java class files
 *.class
 
+#replit 
+.replit
+
 # Generated files
 bin/
 gen/
