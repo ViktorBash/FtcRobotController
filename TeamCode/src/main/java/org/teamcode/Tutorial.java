@@ -18,6 +18,6 @@ public class Tutorial extends OpMode {
 
     @Override
     public void loop(){
-        motor.setPower(1);
+        motor.setPower(gamepad1.left_trigger); // This is how the motor is controlled by the controller
     }
 }
