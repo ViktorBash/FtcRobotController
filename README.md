@@ -1,13 +1,13 @@
-###Robotic Rams Team 10243 Freight Frenzy Code
+#Robotic Rams Team 10243 Freight Frenzy Code
 
 ## Motor Configuration
 
 Names of motors in “Configure Robot” menu on phones: 
 
-Front Left Motor: “FL”
-Front Right Motor: “FR”
-Back Left Motor: “BL”
-Back Right Motor: “BR”
+Front Left Motor: “FL”,
+Front Right Motor: “FR”,
+Back Left Motor: “BL”,
+Back Right Motor: “BR”,
 
 
 
