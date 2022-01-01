@@ -63,9 +63,9 @@ public class MecanumTeleop extends LinearOpMode {
         // used
         double y1 = 0; // front/back
 
-        double fortyFiveInRads = -Math.PI/4;
-        double cosine45 = Math.cos(fortyFiveInRads);
-        double sine45 = Math.sin(fortyFiveInRads);
+        final double fortyFiveInRads = -Math.PI/4;
+        final double cosine45 = Math.cos(fortyFiveInRads);
+        final double sine45 = Math.sin(fortyFiveInRads);
 
         double x2 = 0;
         double y2 = 0;
