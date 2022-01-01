@@ -1,3 +1,21 @@
+###Robotic Rams Team 10243 Freight Frenzy Code
+
+## Motor Configuration
+
+Names of motors in “Configure Robot” menu on phones: 
+
+Front Left Motor: “FL”
+Front Right Motor: “FR”
+Back Left Motor: “BL”
+Back Right Motor: “BR”
+
+
+
+
+
+
+
+
 ## NOTICE
 
 This repository contains the public FTC SDK for the Freight Frenzy (2021-2022) competition season. This repo is specific to the RHS FTC team.
