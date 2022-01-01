@@ -62,6 +62,12 @@ public class MecanumTeleop extends LinearOpMode {
         double x1; // left/right
         double y1; // front/back
 
+        double fortyFiveInRads = -Math.PI/4;
+        double cosine45 = Math.cos(fortyFiveInRads);
+        double sine45 = Math.sin(fortyFiveInRads);
+
+        double x2;
+        double y2;
 
 
         /* Initialize the hardware variables.
@@ -82,13 +88,17 @@ public class MecanumTeleop extends LinearOpMode {
             y1 = -gamepad1.left_stick_y;
             x1  =  gamepad1.left_stick_x;
 
+            // need to rotate 45 degrees
+            y2 = y1 * cosine45 + x1 * sine45;
+            x2 = x1 * cosine45 - y1 * sine45;
+
 
             // Output the safe vales to the motor drives.
-            robot.frontLeftDrive.setPower(x1);
-            robot.frontRightDrive.setPower(x1);
+            robot.frontLeftDrive.setPower(x2);
+            robot.frontRightDrive.setPower(x2);
 
-            robot.backLeftDrive.setPower(y1);
-            robot.backRightDrive.setPower(y1);
+            robot.backLeftDrive.setPower(y2);
+            robot.backRightDrive.setPower(y2);
 
             // Send telemetry message to signify robot running;
             telemetry.addData("claw",  "Offset = %.2f", x1);
