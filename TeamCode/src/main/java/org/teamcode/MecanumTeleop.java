@@ -80,7 +80,7 @@ public class MecanumTeleop extends LinearOpMode {
         while (opModeIsActive()) {
 
             y1 = -gamepad1.left_stick_y;
-            x1  =  gamepad1.right_stick_x;
+            x1  =  gamepad1.left_stick_x;
 
 
             // Output the safe vales to the motor drives.
