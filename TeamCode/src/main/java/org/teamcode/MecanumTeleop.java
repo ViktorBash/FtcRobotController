@@ -84,8 +84,9 @@ public class MecanumTeleop extends LinearOpMode {
 
 
             // Output the safe vales to the motor drives.
-            robot.frontLeftDrive.setPower(y1);
-            robot.frontRightDrive.setPower(y1);
+            robot.frontLeftDrive.setPower(x1);
+            robot.frontRightDrive.setPower(x1);
+
             robot.backLeftDrive.setPower(y1);
             robot.backRightDrive.setPower(y1);
 
