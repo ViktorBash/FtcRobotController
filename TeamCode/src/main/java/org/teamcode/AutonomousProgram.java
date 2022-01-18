@@ -87,7 +87,20 @@ public class AutonomousProgram extends LinearOpMode {
         waitForStart();
 
         // Here is where the autonomous code starts, and how the robot gets controlled
+        // need to rotate 45 degrees
 
+        y2 = y1 * cosine45 + x1 * sine45;
+        x2 = x1 * cosine45 - y1 * sine45;
 
+        // Output the safe vales to the motor drives.
+        robot.frontLeftDrive.setPower(x2);
+        robot.backRightDrive.setPower(x2);
+        robot.frontRightDrive.setPower(y2);
+        robot.backLeftDrive.setPower(y2);
+        sleep(1000);
+        robot.frontLeftDrive.setPower(0);
+        robot.backRightDrive.setPower(0);
+        robot.frontRightDrive.setPower(0);
+        robot.backLeftDrive.setPower(0);
     }
 }
