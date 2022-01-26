@@ -116,8 +116,8 @@ public class MecanumTeleop extends LinearOpMode {
             }
 
             // Send telemetry message to signify robot running;
-            telemetry.addData("claw",  "Offset = %.2f", x1);
-            telemetry.addData("left",  "%.2f", y1);
+            telemetry.addData("Y Value:",  "%.2f", y2);
+            telemetry.addData("X Value:", "%.2f", x2);
             telemetry.update();
 
             // Pace this loop so jaw action is reasonable speed.
