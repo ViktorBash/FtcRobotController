@@ -14,6 +14,20 @@ FTC Robotics has 2 types of programs made for the robot: Autonomous and TeleOp. 
 - **TeleOp** code is ran when teams can **use a controller to drive around** the robot. This is hooking up the controller to the motors and servos of the robot.
 - **Autonomous** code is ran when teams cannot do anything, and the **robot moves around on it's own**. This is programming the robot to move around and do things on it's own.
 
+`FtcRobotController\TeamCode\src\main\java\org\teamcode` contains the TeleOp and Autonomous code.
+
+## Important Program Files:
+[Hardware Mecanum](TeamCode/src/main/java/org/teamcode/HardwareMecanum.java)
+- Defines the hardware that is then used in the MecanumTeleop and AutonomousProgram classes
+- For instance, any motors or servos are defined here
+
+[Mecanum Teleop](TeamCode/src/main/java/org/teamcode/MecanumTeleop.java)
+- Opmode that allows for driving the robot via the left joystick
+- Trig is used to rotate the input so that when somebody pushes a joystick left, the robot moves left
+- Also handles spinning the robot with the right joystick
+
+[AutonomousProgram](TeamCode/src/main/java/org/teamcode/AutonomousProgram.java)
+- Program controls the robot without any input
 
 ## Motor Configuration
 
