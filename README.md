@@ -1,4 +1,13 @@
-#Robotic Rams Team 10243 Freight Frenzy Code
+# 2021-2022 Robotic Rams Team 10243 Freight Frenzy Code
+
+## Setup:
+FTC Programming is done in Java and employs other tools in order function. To get started, you need installed/downloaded:
+- Java
+- Android Studio, IntelliJ, or another Java IDE for editing code (Android Studio is recommended)
+- Git, for versioning and sharing the code
+
+## About The Code
+The code is broken up into two parts: FtcRobotController and TeamCode. The part where you write code in is TeamCode. FtcRobotController contains useful samples for programs that can be implemented on the Robot under `FtcRobotController\FtcRobotController\src\main\java\org\firstinspires\ftc\robotcontroller\external\samples`
 
 ## Motor Configuration
 
@@ -15,8 +24,7 @@ Back Right Motor: “BR”,
 
 
 
-
-## NOTICE
+# FTC Readme & Information:
 
 This repository contains the public FTC SDK for the Freight Frenzy (2021-2022) competition season. This repo is specific to the RHS FTC team.
 
