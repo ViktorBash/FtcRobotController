@@ -7,7 +7,13 @@ FTC Programming is done in Java and employs other tools in order function. To ge
 - Git, for versioning and sharing the code
 
 ## About The Code
-The code is broken up into two parts: FtcRobotController and TeamCode. The part where you write code in is TeamCode. FtcRobotController contains useful samples for programs that can be implemented on the Robot under `FtcRobotController\FtcRobotController\src\main\java\org\firstinspires\ftc\robotcontroller\external\samples`
+The code is broken up into two parts: FtcRobotController and TeamCode. The part where you write code in is TeamCode (most of the time you will be in TeamCode). FtcRobotController contains useful samples for programs that can be implemented on the Robot under `FtcRobotController\FtcRobotController\src\main\java\org\firstinspires\ftc\robotcontroller\external\samples`. 
+
+## Code Architecture
+FTC Robotics has 2 types of programs made for the robot: Autonomous and TeleOp. These correspond to the times in the game when the teams can use controllers to drive the robots and when they can only spectate. 
+- TeleOp code is ran when teams can use a controller to drive around the robot. This is hooking up the controller to the motors and servos of the robot.
+- Autonomous code is ran when teams cannot do anything, and the robot moves around on it's own. This is programming the robot to move around and do things on it's own.
+
 
 ## Motor Configuration
 
