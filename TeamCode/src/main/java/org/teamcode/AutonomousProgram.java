@@ -29,6 +29,12 @@
 
 package org.teamcode;
 
+import android.os.Build;
+import android.util.Pair;
+
+import androidx.annotation.RequiresApi;
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -38,6 +44,8 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 import org.teamcode.HardwareMecanum;
+
+import java.time.Duration;
 
 /**
  * This OpMode uses the common Pushbot hardware class to define the devices on the robot.
@@ -53,7 +61,7 @@ import org.teamcode.HardwareMecanum;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name = "Mecanum: Autonomous", group = "Mecanum")
+@Autonomous(name = "Mecanum: Autonomous", group = "Mecanum")
 public class AutonomousProgram extends LinearOpMode {
 
     /* Declare OpMode members. */
@@ -61,20 +69,9 @@ public class AutonomousProgram extends LinearOpMode {
     /* Public OpMode members. */
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void runOpMode() {
-        double x1 = 0; // left/right, set the initial value that is changed when the joystick is
-        // used
-        double y1 = 0; // front/back
-
-        final double fortyFiveInRads = -Math.PI / 4;
-        final double cosine45 = Math.cos(fortyFiveInRads);
-        final double sine45 = Math.sin(fortyFiveInRads);
-
-        double x2 = 0;
-        double y2 = 0;
-
-
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
          */
@@ -87,21 +84,83 @@ public class AutonomousProgram extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        // Here is where the autonomous code starts, and how the robot gets controlled
-        // need to rotate 45 degrees
+        try {
+            drive(Direction.LEFT, Duration.ofSeconds(2));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // rotate left
+        // pick up block
+        // rotate right
+        try {
+            drive(Direction.UP, Duration.ofSeconds(2));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // drop block
+    }
 
-        y2 = y1 * cosine45 + x1 * sine45;
-        x2 = x1 * cosine45 - y1 * sine45;
+    enum Direction {
+        LEFT,
+        RIGHT,
+        UP,
+        DOWN
+    }
 
-        // Output the safe vales to the motor drives.
-        robot.frontLeftDrive.setPower(x2);
-        robot.backRightDrive.setPower(x2);
-        robot.frontRightDrive.setPower(y2);
-        robot.backLeftDrive.setPower(y2);
-        sleep(1000);
-        robot.frontLeftDrive.setPower(0);
-        robot.backRightDrive.setPower(0);
-        robot.frontRightDrive.setPower(0);
-        robot.backLeftDrive.setPower(0);
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    void spin(Direction direction, Duration length) {
+        switch (direction) {
+            case LEFT:
+                robot.frontRightDrive.setPower(-1);
+                robot.backRightDrive.setPower(-1);
+                robot.frontLeftDrive.setPower(1);
+                robot.backLeftDrive.setPower(1);
+            case RIGHT:
+                robot.frontRightDrive.setPower(1);
+                robot.backRightDrive.setPower(1);
+                robot.frontLeftDrive.setPower(-1);
+                robot.backLeftDrive.setPower(-1);
+        }
+
+        sleep(length.toMillis());
+
+        stop();
+    }
+
+    void halt() {
+        for (DcMotor m : new DcMotor[]{robot.frontLeftDrive, robot.backRightDrive, robot.frontRightDrive, robot.backLeftDrive}) {
+            m.setPower(0);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    void drive(Direction direction, Duration length) throws Exception {
+        double[] powers = getPowers(direction);
+        double x = powers[0];
+        double y = powers[1];
+
+        robot.frontLeftDrive.setPower(x);
+        robot.backRightDrive.setPower(x);
+        robot.frontRightDrive.setPower(y);
+        robot.backLeftDrive.setPower(y);
+
+        sleep(length.toMillis());
+
+        stop();
+    }
+
+    double[] getPowers(Direction direction) throws Exception {
+        switch (direction) {
+            case LEFT:
+                return new double[]{-1, 1};
+            case RIGHT:
+                return new double[]{1, -1};
+            case UP:
+                return new double[]{1, 1};
+            case DOWN:
+                return new double[]{-1, -1};
+        }
+
+        throw new Exception();
     }
 }
