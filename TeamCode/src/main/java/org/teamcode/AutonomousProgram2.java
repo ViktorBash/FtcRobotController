@@ -1,17 +1,7 @@
 package org.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.Hardware;
-import com.qualcomm.robotcore.util.Range;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-
-
-import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
-import org.teamcode.HardwareMecanum;
 
 @Autonomous(name = "Mecanum: Autonomous 2", group = "Mecanum")
 public class AutonomousProgram2 extends LinearOpMode {
