@@ -29,15 +29,9 @@
 
 package org.teamcode;
 
-import android.os.Build;
-import android.util.Pair;
-
-import androidx.annotation.RequiresApi;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import java.time.Duration;
 
 /**
  * This OpMode uses the common Pushbot hardware class to define the devices on the robot.
@@ -61,7 +55,6 @@ public class AutonomousProgram extends LinearOpMode {
     /* Public OpMode members. */
 
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void runOpMode() {
         /* Initialize the hardware variables.
@@ -77,15 +70,11 @@ public class AutonomousProgram extends LinearOpMode {
         waitForStart();
 
         try {
-            drive(Direction.LEFT, Duration.ofSeconds(2));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // rotate left
+            drive(Direction.LEFT, 2000);
         // pick up block
-        // rotate right
-        try {
-            drive(Direction.UP, Duration.ofSeconds(2));
+            drive(Direction.UP, 2000);
+            drive(Direction.RIGHT, 2000);
+            drive(Direction.UP, 2000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -99,24 +88,23 @@ public class AutonomousProgram extends LinearOpMode {
         DOWN
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    void spin(Direction direction, Duration length) {
+    void spin(Direction direction, long length) {
         switch (direction) {
             case LEFT:
-                robot.frontRightDrive.setPower(-1);
-                robot.backRightDrive.setPower(-1);
-                robot.frontLeftDrive.setPower(1);
-                robot.backLeftDrive.setPower(1);
+                robot.frontRightDrive.setPower(-0.5);
+                robot.backRightDrive.setPower(-0.5);
+                robot.frontLeftDrive.setPower(0.5);
+                robot.backLeftDrive.setPower(0.5);
             case RIGHT:
-                robot.frontRightDrive.setPower(1);
-                robot.backRightDrive.setPower(1);
-                robot.frontLeftDrive.setPower(-1);
-                robot.backLeftDrive.setPower(-1);
+                robot.frontRightDrive.setPower(0.5);
+                robot.backRightDrive.setPower(0.5);
+                robot.frontLeftDrive.setPower(-0.5);
+                robot.backLeftDrive.setPower(-0.5);
         }
 
-        sleep(length.toMillis());
+        sleep(length);
 
-        stop();
+        halt();
     }
 
     void halt() {
@@ -125,8 +113,7 @@ public class AutonomousProgram extends LinearOpMode {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    void drive(Direction direction, Duration length) throws Exception {
+    void drive(Direction direction, long length) throws Exception {
         double[] powers = getPowers(direction);
         double x = powers[0];
         double y = powers[1];
@@ -136,21 +123,21 @@ public class AutonomousProgram extends LinearOpMode {
         robot.frontRightDrive.setPower(y);
         robot.backLeftDrive.setPower(y);
 
-        sleep(length.toMillis());
+        sleep(length);
 
-        stop();
+        halt();
     }
 
     double[] getPowers(Direction direction) throws Exception {
         switch (direction) {
             case LEFT:
-                return new double[]{-1, 1};
+                return new double[]{-0.5, 0.5};
             case RIGHT:
-                return new double[]{1, -1};
+                return new double[]{0.5, -0.5};
             case UP:
-                return new double[]{1, 1};
+                return new double[]{0.5, 0.5};
             case DOWN:
-                return new double[]{-1, -1};
+                return new double[]{-0.5, -0.5};
         }
 
         throw new Exception();
