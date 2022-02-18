@@ -58,6 +58,7 @@ public class HardwareMecanum
     public DcMotor  frontRightDrive = null;
     public DcMotor  backLeftDrive = null;
     public DcMotor backRightDrive = null;
+    public DcMotor attachmentDrive = null;
 
 
     /* local OpMode members. */
@@ -79,16 +80,19 @@ public class HardwareMecanum
         frontRightDrive = hwMap.get(DcMotor.class, "FR");
         backLeftDrive    = hwMap.get(DcMotor.class, "BL");
         backRightDrive = hwMap.get(DcMotor.class, "BR");
+        attachmentDrive = hwMap.get(DcMotor.class, "AD");
 
         frontLeftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         frontRightDrive.setDirection(DcMotorSimple.Direction.FORWARD);
         backLeftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         backRightDrive.setDirection(DcMotorSimple.Direction.FORWARD);
+        attachmentDrive.setDirection(DcMotorSimple.Direction.FORWARD);
 
         frontLeftDrive.setPower(0);
         frontRightDrive.setPower(0);
         backLeftDrive.setPower(0);
         backRightDrive.setPower(0);
+        attachmentDrive.setPower(0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
@@ -96,7 +100,7 @@ public class HardwareMecanum
         frontRightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backLeftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
+        attachmentDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
  }
 

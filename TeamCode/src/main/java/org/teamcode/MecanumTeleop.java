@@ -83,6 +83,23 @@ public class MecanumTeleop extends LinearOpMode {
 
             double spin = gamepad1.right_stick_x; // for controlling the spin
 
+            // B Button is pressed, move the motor UP
+            if(gamepad1.b) {
+                robot.attachmentDrive.setPower(0.5);
+            }
+
+            // X Button is pressed, move the motor DOWN
+            if(gamepad1.x){
+                robot.attachmentDrive.setPower(-0.5);
+            }
+            // Neither A or X are pressed, motor should be stopped
+            // TODO: check that robot.attachmentDrive.getPower() is not already 0 before we set it
+            // to 0 to avoid uselessly setting this variable constantly
+            if(!gamepad1.b && !gamepad1.x) {
+                robot.attachmentDrive.setPower(0);
+            }
+
+
             // If someone is moving the right joystick, spin
             if(Math.abs(spin) > 0.1){
                 robot.frontRightDrive.setPower(-spin);
