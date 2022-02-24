@@ -47,9 +47,9 @@ public class AutonomousProgram extends LinearOpMode {
     4 = Right Start, Right End
     
     */
-    
+       
     // Power levels:
-    private static final float LIFT_POWER = 0.5f;
+    private static final float LIFT_POWER = 0.3f;
     private static final float ATTACHMENT_POWER = 0.5f;
     private static final float DRIVE_POWER = 0.5f;
     
@@ -70,16 +70,16 @@ public class AutonomousProgram extends LinearOpMode {
     // [2] Move forward to stacky thing for x milliseconds:
     private static final long MOVE_OFF_WALL = 600;
     // [3] Lift attachment to level of stacky thing for x milliseconds:
-    private static final long LIFT_ATTACHMENT = 1000;
+    private static final long LIFT_ATTACHMENT = 500;
     // [4] Reverse intake to drop block for x milliseconds:
-    private static final long REVERSE_INTAKE = 1000;
+    private static final long REVERSE_INTAKE = 4000;
     // [5] Move backwards to wall for x milliseconds:
-    private static final long MOVE_TO_WALL = 1000;
+    private static final long MOVE_TO_WALL = 800;
     // [6] Crabwalk (Left/Right) until hit side wall for x milliseconds:
-    private static final long CRABWALK_TO_WALL = 1000;
+    private static final long CRABWALK_TO_WALL = 5200;
     // Stop motors
 
-    
+      
     /* Declare OpMode members. */
     HardwareMecanum robot = new HardwareMecanum();   // Use a Mecanum's hardware
     /* Public OpMode members. */

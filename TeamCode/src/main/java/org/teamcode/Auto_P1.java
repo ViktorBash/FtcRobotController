@@ -25,16 +25,36 @@ public class AutonomousProgram extends LinearOpMode {
 
     // Variables:
 
-    // Left side start or right side start: (which direction to move first)
-    private static final boolean IS_LEFT_START = true;
+    // Left or Right start: (which direction to move first)
+    private static final boolean IS_LEFT_START = false;
 
+    // Left end or Right end: (which direction to move to wall at end)
+    private static final boolean IS_LEFT_END = true;
+
+    /*
+
+    (Parking area on top)
+    ______________
+    |  _|    |_  |
+    |[1]      [2]|
+    |   O    O   |
+    |[3]      [4]|
+    |____________|
+    
+    1 = Right Start, Left End
+    2 = Left Start, Right End
+    3 = Left Start, Left End
+    4 = Right Start, Right End
+    
+    */
+    
     // Power levels:
-    private static final float LIFT_POWER = 0.5f;
+    private static final float LIFT_POWER = 0.3f;
     private static final float ATTACHMENT_POWER = 0.5f;
     private static final float DRIVE_POWER = 0.5f;
-
+    
     /*  Autonomous motion timings: 
-
+    
     1. Move (left/right) until in front of the stacky thing
     2. Move forward until almost touching the stacky thing
     3. Lift attachment with preloaded block
@@ -46,17 +66,17 @@ public class AutonomousProgram extends LinearOpMode {
     */
     
     // [1] Crabwalk (Left/Right) until aligned with stacky thing for x milliseconds:
-    private static final long CRABWALK_TO_ALIGN = 1000; 
+    private static final long CRABWALK_TO_ALIGN = 1200; 
     // [2] Move forward to stacky thing for x milliseconds:
-    private static final long MOVE_OFF_WALL = 1000;
+    private static final long MOVE_OFF_WALL = 600;
     // [3] Lift attachment to level of stacky thing for x milliseconds:
-    private static final long LIFT_ATTACHMENT = 1000;
+    private static final long LIFT_ATTACHMENT = 500;
     // [4] Reverse intake to drop block for x milliseconds:
-    private static final long REVERSE_INTAKE = 1000;
+    private static final long REVERSE_INTAKE = 4000;
     // [5] Move backwards to wall for x milliseconds:
-    private static final long MOVE_TO_WALL = 1000;
+    private static final long MOVE_TO_WALL = 800;
     // [6] Crabwalk (Left/Right) until hit side wall for x milliseconds:
-    private static final long CRABWALK_TO_WALL = 1000;
+    private static final long CRABWALK_TO_WALL = 5200;
     // Stop motors
 
     
@@ -79,17 +99,18 @@ public class AutonomousProgram extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        Direction driveDirection = IS_LEFT_START ? Direction.LEFT : Direction.RIGHT;
+        Direction startDirection = IS_LEFT_START ? Direction.LEFT : Direction.RIGHT;
+        Direction endDirection = IS_LEFT_END ? Direction.LEFT : Direction.RIGHT;
 
 
         try {
-            drive(driveDirection, DRIVE_POWER, CRABWALK_TO_ALIGN); // [1] crabwalk (left/right) to line up with stacky thing
+            drive(startDirection, DRIVE_POWER, CRABWALK_TO_ALIGN); // [1] crabwalk (left/right) to line up with stacky thing
         // pick up block
             drive(Direction.FORWARD, DRIVE_POWER, MOVE_OFF_WALL); // [2] move forward to stacky thing
             liftAttachment(LIFT_POWER, LIFT_ATTACHMENT); // [3] lift attachment to stack level
             intake(-ATTACHMENT_POWER, REVERSE_INTAKE); // [4] reverse intake to drop block
             drive(Direction.BACKWARD, DRIVE_POWER, MOVE_TO_WALL); // [5] move backwards to wall
-            drive(driveDirection, DRIVE_POWER, CRABWALK_TO_ALIGN); // [6] crabwalk (left/right) to hit wall
+            drive(endDirection, DRIVE_POWER, CRABWALK_TO_ALIGN); // [6] crabwalk (left/right) to hit wall
             halt(); // halt motors to be safe
         } catch (Exception e) {
             e.printStackTrace();
