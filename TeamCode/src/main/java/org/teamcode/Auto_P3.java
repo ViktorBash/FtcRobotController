@@ -20,7 +20,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  */
 
 @Autonomous(name = "Auto: P3", group = "Mecanum")
-public class AutonomousProgram extends LinearOpMode {
+public class AutoP3 extends LinearOpMode {
 
 
     // Variables:
