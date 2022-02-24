@@ -59,6 +59,8 @@ public class HardwareMecanum
     public DcMotor  backLeftDrive = null;
     public DcMotor backRightDrive = null;
     public DcMotor attachmentDrive = null;
+    public DcMotor liftDriveLeft = null;
+    public DcMotor liftDriveRight = null;
 
 
     /* local OpMode members. */
@@ -81,6 +83,21 @@ public class HardwareMecanum
         backLeftDrive    = hwMap.get(DcMotor.class, "BL");
         backRightDrive = hwMap.get(DcMotor.class, "BR");
         attachmentDrive = hwMap.get(DcMotor.class, "AD");
+        liftDriveLeft = hwMap.get(DcMotor.class, "LDL");
+        liftDriveRight = hwMap.get(DcMotor.class, "LDR");
+
+        /* 
+         * FL - Front Left
+         * FR - Front Right
+         * BL - Back Left
+         * BR - Back Right
+         * AD - Attachment Drive (Intake Sweeper)
+         * LDL - Lift Drive Left
+         * LDR - Lift Drive Right
+        */
+
+
+
 
         frontLeftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         frontRightDrive.setDirection(DcMotorSimple.Direction.FORWARD);
