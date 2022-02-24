@@ -104,13 +104,16 @@ public class AutoP1 extends LinearOpMode {
 
 
         try {
-            drive(startDirection, DRIVE_POWER, CRABWALK_TO_ALIGN); // [1] crabwalk (left/right) to line up with stacky thing
-        // pick up block
-            drive(Direction.FORWARD, DRIVE_POWER, MOVE_OFF_WALL); // [2] move forward to stacky thing
+            drive(startDirection, DRIVE_POWER, CRABWALK_TO_ALIGN, true); // [1] crabwalk (left/right) to line up with stacky thing
+            delay(500);
+            drive(Direction.FORWARD, DRIVE_POWER, MOVE_OFF_WALL, true); // [2] move forward to stacky thing
+            delay(500);
             liftAttachment(LIFT_POWER, LIFT_ATTACHMENT); // [3] lift attachment to stack level
             intake(-ATTACHMENT_POWER, REVERSE_INTAKE); // [4] reverse intake to drop block
-            drive(Direction.BACKWARD, DRIVE_POWER, MOVE_TO_WALL); // [5] move backwards to wall
-            drive(endDirection, DRIVE_POWER, CRABWALK_TO_ALIGN); // [6] crabwalk (left/right) to hit wall
+            drive(Direction.BACKWARD, DRIVE_POWER, MOVE_TO_WALL, true); // [5] move backwards to wall
+            delay(500);
+            drive(endDirection, DRIVE_POWER, CRABWALK_TO_ALIGN, true); // [6] crabwalk (left/right) to hit wall
+            delay(500);
             halt(); // halt motors to be safe
         } catch (Exception e) {
             e.printStackTrace();
