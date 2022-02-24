@@ -2,19 +2,19 @@
 
 ## Setup:
 
-Navigate to teamcode folder to find modified code (TeamCode/src/main/java/org/teamcode)
+- Navigate to teamcode folder to find modified code (TeamCode/src/main/java/org/teamcode)
 
-`Auto_PX.java` - Autonomous program for positions as defined in the graphic below
-`MecanumTeleop.java` - Teleop program
-`HardwareMecanum.java` - Definitions of motor names to be set in configuration of app
+  - `Auto_PX.java` - Autonomous program for positions as defined in the graphic below
+  - `MecanumTeleop.java` - Teleop program
+  - `HardwareMecanum.java` - Definitions of motor names to be set in configuration of app
 
-Ensure the configuration of the app is set as defined in `HardwareMecanum.java` and as shown below.
+- Ensure the configuration of the app is set as defined in `HardwareMecanum.java` and as shown below.
 
-Reference [this guide](https://www.firstinspires.org/sites/default/files/uploads/resource_library/ftc/android-studio-guide.pdf) to learn how to set the software / electrical hardware up.
+- Reference [this guide](https://www.firstinspires.org/sites/default/files/uploads/resource_library/ftc/android-studio-guide.pdf) to learn how to set the software / electrical hardware up.
 
 ### Positions Reference (For Autonomous )
 
-    (Parking area on top)
+    (Parking area on top) [ Note locations marked 1, 2, 3, 4 ]
     ______________
     |  _|    |_  |
     |[1]      [2]|
@@ -26,10 +26,15 @@ Reference [this guide](https://www.firstinspires.org/sites/default/files/uploads
 
 Names of motors in “Configure Robot” menu on phones:
 
-Front Left Motor: “FL”,
-Front Right Motor: “FR”,
-Back Left Motor: “BL”,
-Back Right Motor: “BR”,
+- Front Left Motor: “FL”
+- Front Right Motor: “FR”
+- Back Left Motor: “BL”
+- Back Right Motor: “BR”
+- Intake Motor: "AD"
+- Lift Motor Left: "LDL"
+- Lift Motor Right: "LDR"
+
+---
 
 #### About The Code
 
