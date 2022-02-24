@@ -25,6 +25,10 @@ public class AutonomousProgram extends LinearOpMode {
 
     // Variables:
 
+    // Left side start or right side start: (which direction to move first)
+    private static final boolean IS_LEFT_START = true;
+
+    // Power levels:
     private static final float LIFT_POWER = 0.5f;
     private static final float ATTACHMENT_POWER = 0.5f;
     private static final float DRIVE_POWER = 0.5f;
@@ -41,17 +45,20 @@ public class AutonomousProgram extends LinearOpMode {
     
     */
     
-    // [1] Crabwalk Left for x milliseconds:
-    private static final int CRABWALK_LEFT = 1000; 
-    
-    // [2] Move forward for x milliseconds:
-    private static final int MOVE_OFF_WALL = 1000;
-    
-    // [3] Lift attachment for x milliseconds:
-    private static final int LIFT_ATTACHMENT = 1000;
-    // Rotate 90 deg left (x ms)
-    
-    
+    // [1] Crabwalk (Left/Right) until aligned with stacky thing for x milliseconds:
+    private static final long CRABWALK_TO_ALIGN = 1000; 
+    // [2] Move forward to stacky thing for x milliseconds:
+    private static final long MOVE_OFF_WALL = 1000;
+    // [3] Lift attachment to level of stacky thing for x milliseconds:
+    private static final long LIFT_ATTACHMENT = 1000;
+    // [4] Reverse intake to drop block for x milliseconds:
+    private static final long REVERSE_INTAKE = 1000;
+    // [5] Move backwards to wall for x milliseconds:
+    private static final long MOVE_TO_WALL = 1000;
+    // [6] Crabwalk (Left/Right) until hit side wall for x milliseconds:
+    private static final long CRABWALK_TO_WALL = 1000;
+    // Stop motors
+
     
     /* Declare OpMode members. */
     HardwareMecanum robot = new HardwareMecanum();   // Use a Mecanum's hardware
@@ -72,13 +79,18 @@ public class AutonomousProgram extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
+        Direction driveDirection = IS_LEFT_START ? Direction.LEFT : Direction.RIGHT;
+
+
         try {
-            drive(Direction.LEFT, DRIVE_POWER, CRABWALK_LEFT); // [1] crabwalk left to line up with stacky thing
+            drive(driveDirection, DRIVE_POWER, CRABWALK_TO_ALIGN); // [1] crabwalk (left/right) to line up with stacky thing
         // pick up block
             drive(Direction.FORWARD, DRIVE_POWER, MOVE_OFF_WALL); // [2] move forward to stacky thing
             liftAttachment(LIFT_POWER, LIFT_ATTACHMENT); // [3] lift attachment to stack level
-            
-            drive(Direction.FORWARD, 2000);
+            intake(-ATTACHMENT_POWER, REVERSE_INTAKE); // [4] reverse intake to drop block
+            drive(Direction.BACKWARD, DRIVE_POWER, MOVE_TO_WALL); // [5] move backwards to wall
+            drive(driveDirection, DRIVE_POWER, CRABWALK_TO_ALIGN); // [6] crabwalk (left/right) to hit wall
+            halt(); // halt motors to be safe
         } catch (Exception e) {
             e.printStackTrace();
         }
