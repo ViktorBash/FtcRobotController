@@ -104,13 +104,15 @@ public class AutoP4 extends LinearOpMode {
 
 
         try {
-            drive(startDirection, DRIVE_POWER, CRABWALK_TO_ALIGN); // [1] crabwalk (left/right) to line up with stacky thing
-        // pick up block
-            drive(Direction.FORWARD, DRIVE_POWER, MOVE_OFF_WALL); // [2] move forward to stacky thing
+            drive(startDirection, DRIVE_POWER, CRABWALK_TO_ALIGN, true); // [1] crabwalk (left/right) to line up with stacky thing
+            sleep(500);
+            drive(Direction.FORWARD, DRIVE_POWER, MOVE_OFF_WALL, true); // [2] move forward to stacky thing
+            sleep(500);
             liftAttachment(LIFT_POWER, LIFT_ATTACHMENT); // [3] lift attachment to stack level
             intake(-ATTACHMENT_POWER, REVERSE_INTAKE); // [4] reverse intake to drop block
-            drive(Direction.BACKWARD, DRIVE_POWER, MOVE_TO_WALL); // [5] move backwards to wall
-            drive(endDirection, DRIVE_POWER, CRABWALK_TO_ALIGN); // [6] crabwalk (left/right) to hit wall
+            drive(Direction.BACKWARD, DRIVE_POWER, MOVE_TO_WALL, true); // [5] move backwards to wall
+            sleep(500);
+            drive(endDirection, DRIVE_POWER, CRABWALK_TO_ALIGN, true); // [6] crabwalk (left/right) to hit wall
             halt(); // halt motors to be safe
         } catch (Exception e) {
             e.printStackTrace();
@@ -194,24 +196,24 @@ public class AutoP4 extends LinearOpMode {
         int rasterizationFactor = 10; // how many ms per ramp step
         double powerStep = ((endPower - startPower) / ms) * rasterizationFactor;
         for (int i = 0; i < ms / rasterizationFactor; i++) {
-            float power = startPower + powerStep * i;
+            float power = startPower + (float)powerStep * i;
             drive(direction, power, rasterizationFactor, false);
         }
     }
 
     void liftAttachment(float power, long ms) throws Exception {
-        liftDriveLeft.setPower(power);
-        liftDriveRight.setPower(power);
+        robot.liftDriveLeft.setPower(power);
+        robot.liftDriveRight.setPower(power);
         sleep(ms);
-        liftDriveLeft.setPower(0);
-        liftDriveRight.setPower(0);
+        robot.liftDriveLeft.setPower(0);
+        robot.liftDriveRight.setPower(0);
     }
 
 
     // Negative power yields release of items
     void intake(float power, long ms) throws Exception {
-        attachmentDrive.setPower(power);
+        robot.attachmentDrive.setPower(power);
         sleep(ms);
-        attachmentDrive.setPower(0);
+        robot.attachmentDrive.setPower(0);
     }
 }
